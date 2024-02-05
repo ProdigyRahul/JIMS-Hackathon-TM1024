@@ -28,9 +28,9 @@ function MainContainer() {
             if (rn === homeName) {
               iconName = focused ? "home" : "home-outline";
             } else if (rn === detailsName) {
-              iconName = focused ? "list" : "list-outline";
+              iconName = focused ? "list" : "card-outline";
             } else if (rn === settingsName) {
-              iconName = focused ? "settings" : "settings-outline";
+              iconName = focused ? "settings" : "person-outline";
             }
 
             // You can return any component that you like here!
