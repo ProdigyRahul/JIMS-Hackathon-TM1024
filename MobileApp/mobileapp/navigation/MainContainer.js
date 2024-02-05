@@ -10,8 +10,8 @@ import ProfileScreen from "./screens/ProfileScreen";
 
 //Screen names
 const homeName = "Home";
-const detailsName = "Booking";
-const settingsName = "Profile";
+const bookingName = "Booking";
+const profileName = "Profile";
 
 const Tab = createBottomTabNavigator();
 
@@ -27,13 +27,12 @@ function MainContainer() {
 
             if (rn === homeName) {
               iconName = focused ? "home" : "home-outline";
-            } else if (rn === detailsName) {
+            } else if (rn === bookingName) {
               iconName = focused ? "card" : "card-outline";
-            } else if (rn === settingsName) {
+            } else if (rn === profileName) {
               iconName = focused ? "person" : "person-outline";
             }
 
-            // You can return any component that you like here!
             return <Ionicons name={iconName} size={size} color={color} />;
           },
         })}
@@ -45,8 +44,8 @@ function MainContainer() {
         }}
       >
         <Tab.Screen name={homeName} component={HomeScreen} />
-        <Tab.Screen name={detailsName} component={BookingScreen} />
-        <Tab.Screen name={settingsName} component={ProfileScreen} />
+        <Tab.Screen name={bookingName} component={BookingScreen} />
+        <Tab.Screen name={profileName} component={ProfileScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
