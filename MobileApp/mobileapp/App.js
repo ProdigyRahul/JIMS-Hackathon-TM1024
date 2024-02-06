@@ -37,7 +37,7 @@ export default function App() {
       {loading ? (
         <Loading />
       ) : viewedOnBoarding ? (
-        <MainContainer />
+        <OnBoarding />
       ) : (
         <OnBoarding />
       )}

@@ -49,26 +49,24 @@ const NextButton = ({ percentage, scrollTo }) => {
   return (
     <View style={styles.container}>
       <View style={styles.svgContainer}>
-        <Svg width={size} height={size}>
-          <G rotation="-90" origin={center}>
-            <Circle
-              stroke="#E6E7E8"
-              cx={center}
-              cy={radius}
-              strokeWidth={strokeWidth}
-            />
-            <Circle
-              ref={progessRef}
-              stroke="#468FCC"
-              cx={center}
-              cy={center}
-              r={radius}
-              strokeWidth={strokeWidth}
-              strokeDasharray={circumference}
-              strokeDashoffset={circumference - (circumference * 25) / 100}
-            />
-          </G>
-        </Svg>
+        <G rotation="-90" origin={center}>
+          <Circle
+            stroke="#E6E7E8"
+            cx={center}
+            cy={radius}
+            strokeWidth={strokeWidth}
+          />
+          <Circle
+            ref={progessRef}
+            stroke="#468FCC"
+            cx={center}
+            cy={center}
+            r={radius}
+            strokeWidth={strokeWidth}
+            strokeDasharray={circumference}
+            strokeDashoffset={circumference - (circumference * 25) / 100}
+          />
+        </G>
       </View>
       <TouchableOpacity
         onPress={scrollTo}
