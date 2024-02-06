@@ -1,10 +1,16 @@
-// Login.js
 import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import InputNumber from "./InputNumber"; // Import the InputNumber component
+import InputNumber from "./InputNumber";
+import { useNavigation } from "@react-navigation/native";
 
-const Login = ({ navigation }) => {
+const Login = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
+  const loginNavigation = useNavigation();
+
+  const handleGetOTP = () => {
+    // Navigate to the 'Home' tab in MainContainer
+    loginNavigation.navigate("Home");
+  };
 
   return (
     <View style={styles.mainContainer}>
@@ -14,12 +20,12 @@ const Login = ({ navigation }) => {
         <Text style={styles.headingTitle}>Welcome Back!</Text>
         <Text style={styles.subTitle}>Sign in to book your parking spot</Text>
 
-        {/* Replace the TextInput with InputNumber */}
         <InputNumber
           placeholder="Phone Number"
           keyboardType="numeric"
           value={phoneNumber}
           onChangeText={(text) => setPhoneNumber(text)}
+          onPressGetOTP={handleGetOTP}
         />
 
         <Text style={styles.forgotPassword}>Forgot your password?</Text>
@@ -58,18 +64,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 20,
     textAlign: "center",
-  },
-  inputContainer: {
-    width: "100%",
-    marginBottom: 20,
-  },
-  input: {
-    height: 40,
-    borderColor: "gray",
-    borderWidth: 1,
-    borderRadius: 5,
-    padding: 10,
-    width: "100%",
   },
   forgotPassword: {
     color: "blue",

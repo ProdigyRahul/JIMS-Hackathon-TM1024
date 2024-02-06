@@ -9,11 +9,13 @@ import {
 import { Picker } from "@react-native-community/picker";
 import { AsYouType, parsePhoneNumberFromString } from "libphonenumber-js";
 import { CountryCodePicker, CountryCodeKey } from "./CountryCodes";
+import { useNavigation } from "@react-navigation/native";
 
 const InputNumber = ({ onPressGetOTP }) => {
   const [text, setText] = useState("");
   const [code, setCode] = useState("101");
   const [textSize, setTextSize] = useState(15);
+  const navigation = useNavigation();
 
   useEffect(() => {
     if (text.length > 0) setTextSize(18);
@@ -41,6 +43,10 @@ const InputNumber = ({ onPressGetOTP }) => {
     const num = parsePhoneNumberFromString(text, CountryCodeKey[code][0]);
     if (!!num && num.isPossible()) {
       console.log("Phone Number", num.number);
+      // Optionally, perform any other logic related to sign-in
+
+      // Navigating to MainContainer after successful phone number validation
+      navigation.navigate("MainContainer"); // Assuming 'Home' is the name of the tab
     } else {
       alert("Please enter a valid phone number");
     }
@@ -72,7 +78,13 @@ const InputNumber = ({ onPressGetOTP }) => {
           textAlign="left"
         />
       </View>
-      <TouchableOpacity style={styles.button} onPress={onPressGetOTP}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          onPressGetOTP();
+          signInWithPhone();
+        }}
+      >
         <Text style={{ color: "#ffffff", fontWeight: "bold", fontSize: 16 }}>
           Get OTP
         </Text>
