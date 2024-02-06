@@ -1,3 +1,5 @@
+// NextButton.js
+
 import { StyleSheet, Animated, TouchableOpacity, View } from "react-native";
 import Svg, { G, Circle } from "react-native-svg";
 import React, { useEffect, useRef } from "react";
@@ -46,26 +48,28 @@ const NextButton = ({ percentage, scrollTo }) => {
 
   return (
     <View style={styles.container}>
-      <Svg width={size} height={size}>
-        <G rotation="-90" origin={center}>
-          <Circle
-            stroke="#E6E7E8"
-            cx={center}
-            cy={radius}
-            strokeWidth={strokeWidth}
-          />
-          <Circle
-            ref={progessRef}
-            stroke="#468FCC"
-            cx={center}
-            cy={center}
-            r={radius}
-            strokeWidth={strokeWidth}
-            strokeDasharray={circumference}
-            strokeDashoffset={circumference - (circumference * 25) / 100}
-          />
-        </G>
-      </Svg>
+      <View style={styles.svgContainer}>
+        <Svg width={size} height={size}>
+          <G rotation="-90" origin={center}>
+            <Circle
+              stroke="#E6E7E8"
+              cx={center}
+              cy={radius}
+              strokeWidth={strokeWidth}
+            />
+            <Circle
+              ref={progessRef}
+              stroke="#468FCC"
+              cx={center}
+              cy={center}
+              r={radius}
+              strokeWidth={strokeWidth}
+              strokeDasharray={circumference}
+              strokeDashoffset={circumference - (circumference * 25) / 100}
+            />
+          </G>
+        </Svg>
+      </View>
       <TouchableOpacity
         onPress={scrollTo}
         style={styles.button}
@@ -84,6 +88,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  svgContainer: {
+    backgroundColor: "#ffffff",
   },
   button: {
     position: "absolute",
