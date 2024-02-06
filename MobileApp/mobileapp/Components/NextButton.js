@@ -56,7 +56,7 @@ const NextButton = ({ percentage, scrollTo }) => {
           />
           <Circle
             ref={progessRef}
-            stroke="#F4339F"
+            stroke="#468FCC"
             cx={center}
             cy={center}
             r={radius}
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   },
   button: {
     position: "absolute",
-    backgroundColor: "#f4338f",
+    backgroundColor: "#468FCC",
     borderRadius: 100,
     padding: 20,
   },
