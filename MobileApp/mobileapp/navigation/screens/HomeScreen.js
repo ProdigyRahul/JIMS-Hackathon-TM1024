@@ -82,7 +82,7 @@ const Home = () => {
             handleLocationSelect(data, details)
           }
           query={{
-            key: "YOUR_GOOGLE_MAPS_API_KEY",
+            key: "NO_API",
             language: "en",
           }}
         />

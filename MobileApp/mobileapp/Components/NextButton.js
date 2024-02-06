@@ -4,8 +4,10 @@ import { StyleSheet, Animated, TouchableOpacity, View } from "react-native";
 import Svg, { G, Circle } from "react-native-svg";
 import React, { useEffect, useRef } from "react";
 import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const NextButton = ({ percentage, scrollTo }) => {
+  const navigation = useNavigation();
   const size = 128;
   const strokeWidth = 2;
   const center = size / 2;

@@ -1,24 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { View, TextInput, Button, StyleSheet } from "react-native";
+import {
+  View,
+  TextInput,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+} from "react-native";
 import { Picker } from "@react-native-community/picker";
 import { AsYouType, parsePhoneNumberFromString } from "libphonenumber-js";
 import { CountryCodePicker, CountryCodeKey } from "./CountryCodes";
 
-const InputNumber = () => {
-  // state for controlled text
+const InputNumber = ({ onPressGetOTP }) => {
   const [text, setText] = useState("");
-  // selected country code
-  const [code, setCode] = useState("101"); // default country code
-  // conditional rendering of TextInput font size
+  const [code, setCode] = useState("101");
   const [textSize, setTextSize] = useState(15);
 
-  // condtion for placeholder to be a smaller font size than the text
   useEffect(() => {
     if (text.length > 0) setTextSize(18);
     else if (text.length === 0) setTextSize(15);
   }, [text]);
 
-  // function for controlled text
   const onTextChange = (number) => {
     const num = parsePhoneNumberFromString(number, CountryCodeKey[code][0]);
     let reg = /^[0-9]/;
@@ -36,7 +37,6 @@ const InputNumber = () => {
     }
   };
 
-  // function that is called when TextInput is submitted
   const signInWithPhone = () => {
     const num = parsePhoneNumberFromString(text, CountryCodeKey[code][0]);
     if (!!num && num.isPossible()) {
@@ -72,7 +72,11 @@ const InputNumber = () => {
           textAlign="left"
         />
       </View>
-      <Button style={styles.button} title="Get OTP" onPress={signInWithPhone} />
+      <TouchableOpacity style={styles.button} onPress={onPressGetOTP}>
+        <Text style={{ color: "#ffffff", fontWeight: "bold", fontSize: 16 }}>
+          Get OTP
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -91,11 +95,12 @@ const styles = StyleSheet.create({
     marginLeft: -15,
   },
   button: {
-    marginTop: 20,
+    marginTop: 3,
     width: 300,
-    backgroundColor: "#016CC6",
+    backgroundColor: "#468FCC",
     padding: 10,
     borderRadius: 5,
+    alignItems: "center",
   },
 });
 

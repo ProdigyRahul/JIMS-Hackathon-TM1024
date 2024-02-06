@@ -1,53 +1,25 @@
-import { useState, useRef, useEffect } from "react";
-import { StatusBar } from "expo-status-bar";
-import { ActivityIndicator, StyleSheet, View } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import Login from "./Components/Login";
-import MainContainer from "./navigation/MainContainer";
-import OnBoarding from "./Components/OnBoarding";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
-const Loading = () => {
-  <View>
-    <ActivityIndicator size="large" />
-  </View>;
+import OnBoarding from "./Components/OnBoarding";
+import Login from "./Components/Login";
+
+const Stack = createStackNavigator();
+
+const App = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="OnBoarding"
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name="OnBoarding" component={OnBoarding} />
+        <Stack.Screen name="Login" component={Login} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 };
 
-export default function App() {
-  const [loading, setLoading] = useState(true);
-  const [viewedOnBoarding, setviewedOnBoarding] = useState(false);
-  const checkOnBoarding = async () => {
-    try {
-      const value = await AsyncStorage.getItem("@viewedOnBoarding");
-      if (value != null) {
-        setviewedOnBoarding(true);
-      }
-    } catch (error) {
-      console.log("Error: ", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    checkOnBoarding();
-  }, []);
-
-  return (
-    <View style={styles.container}>
-      {loading ? (
-        <Loading />
-      ) : viewedOnBoarding ? (
-        <MainContainer />
-      ) : (
-        <OnBoarding />
-      )}
-      <StatusBar style="auto" />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+export default App;

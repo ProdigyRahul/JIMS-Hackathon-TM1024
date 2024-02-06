@@ -1,12 +1,16 @@
+// OnBoarding.js
 import { FlatList, StyleSheet, Text, View, Animated } from "react-native";
 import React, { useState, useRef } from "react";
+import { useNavigation } from "@react-navigation/native";
+
 import slides from "../utils/slides";
 import OnBoardingItem from "./OnBoardingItem";
 import Pageintor from "./pageIndicator";
 import NextButton from "./NextButton";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const OnBoarding = () => {
+  const navigation = useNavigation();
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
   const slidesRef = useRef(null);
@@ -17,15 +21,11 @@ const OnBoarding = () => {
 
   const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
 
-  const scrollTo = async () => {
+  const scrollTo = () => {
     if (currentIndex < slides.length - 1) {
       slidesRef.current.scrollToIndex({ index: currentIndex + 1 });
     } else {
-      try {
-        await AsyncStorage.setItem("@viewedOnBoarding", "true");
-      } catch (error) {
-        console.log("Error: ", error);
-      }
+      navigation.navigate("Login"); // Use navigation to navigate to Login screen
     }
   };
 
